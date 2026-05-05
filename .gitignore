@@ -1,0 +1,25 @@
+# Data
+depmap_data/
+*.csv
+*.zip
+
+# Visualizations
+*.png
+*.jpg
+*.pdf
+Research_STP/outputs/
+
+# LaTeX Aux
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.toc
+
+# Python
+__pycache__/
+.venv/
+.env
+
+# OS
+.DS_Store

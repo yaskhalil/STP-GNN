@@ -1,0 +1,76 @@
+\documentclass[11pt, letterpaper]{article}
+
+% Packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{enumitem}
+
+% Page geometry
+\geometry{
+	top=1in,
+	bottom=1in,
+	left=1in,
+	right=1in
+}
+
+% Remove paragraph indentations and add space between paragraphs
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% ----------------------------------------------------
+% HEADER
+% ----------------------------------------------------
+\title{Final Progress Report Spring - 2026 \\ \large STP-GNN Architecture and Cell Cycle Vulnerability Analysis}
+\author{Yaseen Khalil}
+\date{May 5, 2026}
+
+\begin{document}
+	
+	\maketitle
+	
+	% ----------------------------------------------------
+	% BODY
+	% ----------------------------------------------------
+	
+	\section{Project Objective}
+	The primary goal of this research is to develop an ``Adversarial Vulnerability Engine'' for computational oncology. Traditional Graph Neural Networks (GNNs) use continuous message passing, which inherently washes out the strict Boolean logic that governs gene regulatory networks. To resolve this, we engineered a Semi-Tensor Product Graph Neural Network (STP-GNN). This architecture allows us to retain the strict biological logic of a cell while using advanced machine learning (gradient descent) to find critical vulnerabilities, or ``kill switches,'' within the network.
+	
+	\section{The Mathematical Engine}
+	To allow a machine learning model to attack a biological network, we had to solve the gradient vanishing problem. Standard Boolean logic ($0$s and $1$s) is mathematically flat, preventing an AI from learning. 
+	
+	\textbf{Continuous Relaxation:} We solved this by parameterizing the logic transitions ($\Theta$) and applying a Temperature-Scaled Softmax. This melts the rigid logic into a smooth, differentiable probability curve:
+	\begin{equation}
+		\tilde{M}_i = \text{Softmax}\left(\frac{\Theta_i}{\tau}\right)
+	\end{equation}
+	Setting the temperature scalar to $\tau = 10.0$ provided the exact mathematical slope needed for the optimization engine to navigate the logic without stalling.
+	
+	\textbf{State Evolution:} The network's global state updates over time using the Kronecker product of all local nodes:
+	\begin{equation}
+		x(t+1) = \left( \bigotimes_{i=1}^{N} \tilde{M}_i \right) x(t)
+	\end{equation}
+	Because calculating this massive transition matrix explicitly would exceed GPU memory limits, we implemented an implicit Vector-Jacobian Product (VJP). This allows the engine to run backpropagation efficiently without materializing the full matrix.
+	
+	\section{Phase 1 Results: The p53-Mdm2 Network ($N=5$)}
+	We initially tested the engine on a small, 5-node model of the p53 tumor suppressor network. 
+	\begin{itemize}
+		\item \textbf{Outcome:} The mathematical framework operated flawlessly, successfully bypassing gradient vanishing.
+		\item \textbf{Conclusion:} The $N=5$ model lacked the complex topological feedback loops required to truly test the adversarial engine. It served as a necessary proof-of-concept for the continuous relaxation, but required scaling to a more biologically rigorous target.
+	\end{itemize}
+	
+	\section{Phase 2 Results: The Mammalian Cell Cycle ($N=10$)}
+	We scaled the architecture to a widely validated 10-node model of the mammalian cell cycle. Our objective was to determine if the AI could autonomously discover how to break the cycle and force it into an arrested state.
+	\begin{itemize}
+		\item \textbf{Holographic Resilience:} The engine proved that knocking out a single gene is highly inefficient due to biological redundancy. Instead, the engine calculated that a coordinated, multi-node attack (polypharmacology) was required to crash the cell cycle.
+		\item \textbf{The Vulnerability Bottleneck:} The engine independently identified the \textbf{Rb-E2F axis} as the most critical vulnerability in the network's topology. 
+		\item \textbf{Clinical Validation (DepMap):} To ensure the AI was not generating mathematical artifacts, we cross-referenced its findings with real-world CRISPR knockout data from the Broad Institute's Dependency Map (DepMap), which tracks over 1,000 human cancer cell lines. The empirical data perfectly matched the model's prediction: cell lines with mutated or lost Rb show a massive dependency on E2F for survival. The model successfully predicted a known real-world clinical vulnerability.
+	\end{itemize}
+	
+	\section{Next Steps}
+	The core mathematical architecture is now verified, and the biological predictions demonstrate empirical parity with clinical data. Over the next 1-2 weeks, my immediate priorities are:
+	\begin{enumerate}
+		\item Consolidating these findings and prewriting the comprehensive end-of-semester research report.
+		\item Outlining the high-performance computing requirements (specifically sparse tensor operations) needed to scale this architecture to much larger, high-dimensional gene regulatory networks ($N \ge 15$) for future research applications.
+	\end{enumerate}
+	
+\end{document}
