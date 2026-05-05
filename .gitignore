@@ -9,6 +9,9 @@ depmap_data/
 *.pdf
 Research_STP/outputs/
 
+# Drafts and Reports (Local Only)
+Research_STP/drafts/
+
 # LaTeX Aux
 *.aux
 *.log
